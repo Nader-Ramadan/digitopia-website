@@ -10,6 +10,7 @@ A modern, responsive website for DigitalForge Agency built with Next.js, TypeScr
 - 🎭 Smooth animations with Framer Motion
 - 🎯 SEO-friendly structure
 - ♿ Accessible components
+- 📦 Static export ready for GitHub Pages
 
 ## Getting Started
 
@@ -66,10 +67,43 @@ Replace the placeholder images in `components/Portfolio.tsx` with your actual pr
 
 ## Build for Production
 
+### Static Export (for GitHub Pages)
+
 ```bash
 npm run build
-npm start
 ```
+
+This creates an `out` folder with all static files ready for deployment.
+
+### Test Static Build Locally
+
+```bash
+npm run build
+npx serve out
+```
+
+## Deployment
+
+### GitHub Pages (Configured)
+
+This project is configured for static export and can be deployed to GitHub Pages:
+
+1. **Automated Deployment** (Recommended):
+   - Enable GitHub Pages in repository settings
+   - Select "GitHub Actions" as the source
+   - Push to `main` branch - deployment happens automatically
+   - See `GITHUB_PAGES_DEPLOY.md` for detailed instructions
+
+2. **Manual Deployment**:
+   - Build: `npm run build`
+   - Deploy the `out` folder to GitHub Pages
+
+Your site will be available at: `https://digitopiainc.com` (custom domain configured)
+
+### Other Platforms
+
+- **Vercel**: Import repository, auto-detects Next.js
+- **Netlify**: Connect repo, build command: `npm run build`, publish: `out`
 
 ## Technologies Used
 
