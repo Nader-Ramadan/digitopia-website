@@ -1,15 +1,18 @@
 import Navigation from '@/components/Navigation'
-import Hero from '@/components/Hero'
+import Services from '@/components/Services'
 import ProjectCTA from '@/components/ProjectCTA'
 import Footer from '@/components/Footer'
 
-export default function Home() {
+export default function ServicesPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <Hero />
+      <div className="pt-20">
+        <Services />
+      </div>
       <ProjectCTA />
       <Footer />
     </main>
   )
 }
+

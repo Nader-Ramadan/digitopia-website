@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +19,11 @@ export default function Navigation() {
   }, [])
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   return (
@@ -29,48 +32,62 @@ export default function Navigation() {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+          ? 'bg-[#0b1220]/95 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
+          : 'bg-[#0b1220]/80 backdrop-blur-md'
+      } border-b border-white/5`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent"
+            whileHover={{ scale: 1.02 }}
+            className="flex items-center gap-3 select-none"
           >
-            DigitalForge
+            <Link href="/" className="flex items-center gap-3">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-[0_10px_20px_rgba(0,0,0,0.35)]">
+                <span className="text-white font-bold tracking-tight">DI</span>
+              </span>
+              <span className="text-white font-semibold text-lg tracking-tight">
+                Digitobia Inc
+              </span>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-primary-600 transition-colors font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => {
+              const isActive =
+                pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href))
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive ? 'text-blue-400' : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
+              className="px-6 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-[0_10px_20px_rgba(0,0,0,0.35)] transition-all"
             >
-              Get Started
+              Get a Quote
             </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700"
+            className="md:hidden transition-colors text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -100,25 +117,32 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t"
+            className="md:hidden bg-[#0b1220]/95 backdrop-blur-md border-t border-white/5"
           >
             <div className="px-4 py-4 space-y-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="block text-gray-700 hover:text-primary-600 transition-colors font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isActive =
+                  pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href))
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block text-base font-medium transition-colors ${
+                      isActive ? 'text-blue-400' : 'text-white/85 hover:text-white'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
               <a
-                href="#contact"
-                className="block px-6 py-2 bg-primary-600 text-white rounded-full font-semibold text-center"
+                href="/contact"
+                className="block px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold text-center shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get Started
+                Get a Quote
               </a>
             </div>
           </motion.div>
