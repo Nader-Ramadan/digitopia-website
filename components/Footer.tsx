@@ -1,6 +1,7 @@
 'use client'
 
 import { Linkedin, MapPin, Phone, Mail, Twitter } from 'lucide-react'
+import Logo from '@/components/Logo'
 
 const socialLinks = [
   { icon: Twitter, href: '#', label: 'Twitter' },
@@ -30,14 +31,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-[0_10px_20px_rgba(0,0,0,0.35)]">
-                <span className="text-white font-bold tracking-tight">DI</span>
-              </span>
-              <span className="text-white font-semibold text-lg tracking-tight">
-                Digitobia Inc
-              </span>
-            </div>
+            <Logo showText />
 
             <p className="mt-5 max-w-sm text-sm leading-6 text-white/65">
               Crafting digital excellence for enterprises through innovative design
@@ -111,7 +105,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-white/50" />
-                <span className="text-white/60">hello@digitobia.com</span>
+                <span className="text-white/60">hello@digitopiainc.com</span>
               </li>
             </ul>
           </div>
@@ -119,7 +113,7 @@ export default function Footer() {
 
         <div className="mt-14 pt-8 border-t border-white/10 text-center text-xs text-white/55">
           <p>
-            © {new Date().getFullYear()} Digitobia Inc. All rights reserved. |{' '}
+            © {new Date().getFullYear()} Digitopia Inc. All rights reserved. |{' '}
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy
             </a>{' '}

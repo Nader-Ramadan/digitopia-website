@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Logo from '@/components/Logo'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -39,17 +40,9 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center gap-3 select-none"
-          >
-            <Link href="/" className="flex items-center gap-3">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-[0_10px_20px_rgba(0,0,0,0.35)]">
-                <span className="text-white font-bold tracking-tight">DI</span>
-              </span>
-              <span className="text-white font-semibold text-lg tracking-tight">
-                Digitobia Inc
-              </span>
+          <motion.div whileHover={{ scale: 1.02 }} className="select-none">
+            <Link href="/">
+              <Logo showText />
             </Link>
           </motion.div>
 

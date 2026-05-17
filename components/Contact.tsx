@@ -64,7 +64,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitalforge.com</p>
+                    <p className="text-primary-100">hello@digitopiainc.com</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">

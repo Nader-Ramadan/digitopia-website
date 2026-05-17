@@ -5,8 +5,17 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DigitalForge - Digital Agency',
+  title: 'Digitopia Inc - Digital Agency',
   description: 'Transforming ideas into digital excellence',
+  icons: {
+    icon: [
+      {
+        url: '/favicon.svg',
+        type: 'image/svg+xml',
+        sizes: '32x32',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
