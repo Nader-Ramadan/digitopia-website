@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const contactEmail = 'hello@digitopiainc.com'
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,10 +15,18 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = encodeURIComponent(`New project inquiry from ${formData.name}`)
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        '',
+        formData.message,
+      ].join('\n')
+    )
+
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`
   }
 
   const handleChange = (
@@ -64,7 +74,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitopiainc.com</p>
+                    <p className="text-primary-100">{contactEmail}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -154,9 +164,12 @@ export default function Contact() {
               whileTap={{ scale: 0.95 }}
               className="w-full px-8 py-4 bg-white text-primary-600 rounded-full font-semibold hover:bg-primary-50 transition-colors flex items-center justify-center space-x-2"
             >
-              <span>Send Message</span>
+              <span>Open Email Draft</span>
               <Send className="w-5 h-5" />
             </motion.button>
+            <p className="text-sm text-primary-100 text-center">
+              This opens your email app with the message filled in so you can send it directly.
+            </p>
           </motion.form>
         </div>
       </div>
