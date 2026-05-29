@@ -73,7 +73,7 @@ export default function LogoDesign() {
 
             {/* CTA Button */}
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-400 text-white rounded-full font-semibold hover:bg-cyan-500 transition-colors"
