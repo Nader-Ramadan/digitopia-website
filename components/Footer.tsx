@@ -1,6 +1,7 @@
 'use client'
 
 import { Linkedin, MapPin, Phone, Mail, Twitter } from 'lucide-react'
+import Link from 'next/link'
 import Logo from '@/components/Logo'
 
 const socialLinks = [
@@ -61,12 +62,12 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-white/60 hover:text-white transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -78,12 +79,12 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               {servicesLinks.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-white/60 hover:text-white transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
