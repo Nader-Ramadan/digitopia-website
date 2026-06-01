@@ -68,14 +68,17 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <motion.a
-              href="/contact"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-[0_10px_20px_rgba(0,0,0,0.35)] transition-all"
             >
-              Get a Quote
-            </motion.a>
+              <Link
+                href="/contact"
+                className="px-6 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-[0_10px_20px_rgba(0,0,0,0.35)] transition-all"
+              >
+                Get a Quote
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,13 +133,13 @@ export default function Navigation() {
                   </Link>
                 )
               })}
-              <a
+              <Link
                 href="/contact"
                 className="block px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold text-center shadow-[0_10px_20px_rgba(0,0,0,0.35)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Get a Quote
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

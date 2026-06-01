@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Users, Award, TrendingUp, Heart } from 'lucide-react'
 
 const stats = [
@@ -36,14 +37,17 @@ export default function About() {
               business results. We believe in building long-term partnerships
               with our clients.
             </p>
-            <motion.a
-              href="#contact"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block px-8 py-4 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
             >
-              Work With Us
-            </motion.a>
+              <Link
+                href="/contact"
+                className="inline-block px-8 py-4 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
+              >
+                Work With Us
+              </Link>
+            </motion.div>
           </motion.div>
 
           <motion.div
