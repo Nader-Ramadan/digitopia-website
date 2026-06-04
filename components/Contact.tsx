@@ -29,7 +29,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
+    <section id="contact" className="scroll-mt-24 py-24 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
