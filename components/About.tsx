@@ -42,7 +42,7 @@ export default function About() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/contact"
+                href="/contact#contact"
                 className="inline-block px-8 py-4 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
               >
                 Work With Us

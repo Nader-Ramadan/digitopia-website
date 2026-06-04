@@ -78,7 +78,7 @@ export default function LogoDesign() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="/contact"
+                href="/contact#contact"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-400 text-white rounded-full font-semibold hover:bg-cyan-500 transition-colors"
               >
                 Get Started
