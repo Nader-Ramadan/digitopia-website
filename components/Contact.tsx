@@ -4,19 +4,29 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const contactEmail = 'hello@digitopiainc.com'
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   })
+  const [submitMessage, setSubmitMessage] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = `Project inquiry from ${formData.name}`
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      '',
+      formData.message,
+    ].join('\n')
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    setSubmitMessage('Your email app should open with your message filled in. Please send it there so we receive your inquiry.')
   }
 
   const handleChange = (
@@ -64,7 +74,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitopiainc.com</p>
+                    <a
+                      href={`mailto:${contactEmail}`}
+                      className="text-primary-100 underline-offset-4 hover:underline"
+                    >
+                      {contactEmail}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -154,9 +169,14 @@ export default function Contact() {
               whileTap={{ scale: 0.95 }}
               className="w-full px-8 py-4 bg-white text-primary-600 rounded-full font-semibold hover:bg-primary-50 transition-colors flex items-center justify-center space-x-2"
             >
-              <span>Send Message</span>
+              <span>Open Email App</span>
               <Send className="w-5 h-5" />
             </motion.button>
+            {submitMessage && (
+              <p className="rounded-lg bg-white/10 px-4 py-3 text-sm text-primary-50">
+                {submitMessage}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
