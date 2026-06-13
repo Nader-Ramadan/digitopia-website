@@ -4,24 +4,40 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const CONTACT_EMAIL = 'hello@digitopiainc.com'
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   })
+  const [submissionMessage, setSubmissionMessage] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = encodeURIComponent(`Project inquiry from ${formData.name}`)
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        '',
+        'Message:',
+        formData.message,
+      ].join('\n')
+    )
+
+    setSubmissionMessage(
+      `Your email app should open with your message ready to send. If it does not, please email ${CONTACT_EMAIL}.`
+    )
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
   }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    setSubmissionMessage('')
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -157,6 +173,11 @@ export default function Contact() {
               <span>Send Message</span>
               <Send className="w-5 h-5" />
             </motion.button>
+            {submissionMessage && (
+              <p className="text-sm text-primary-100 text-center" role="status">
+                {submissionMessage}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
