@@ -10,13 +10,25 @@ export default function Contact() {
     email: '',
     message: '',
   })
+  const [submitMessage, setSubmitMessage] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = encodeURIComponent(`New project inquiry from ${formData.name}`)
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        '',
+        formData.message,
+      ].join('\n')
+    )
+
+    window.location.href = `mailto:hello@digitopiainc.com?subject=${subject}&body=${body}`
+    setSubmitMessage(
+      'Your email app should open with your message prefilled. If it does not, please email hello@digitopiainc.com directly.'
+    )
   }
 
   const handleChange = (
@@ -157,6 +169,11 @@ export default function Contact() {
               <span>Send Message</span>
               <Send className="w-5 h-5" />
             </motion.button>
+            {submitMessage && (
+              <p className="text-sm text-primary-100" role="status">
+                {submitMessage}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
