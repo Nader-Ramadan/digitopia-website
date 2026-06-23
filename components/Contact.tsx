@@ -4,19 +4,33 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const CONTACT_EMAIL = 'hello@digitopiainc.com'
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   })
+  const [submissionMessage, setSubmissionMessage] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = `Project inquiry from ${formData.name}`
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      '',
+      formData.message,
+    ].join('\n')
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`
+    setSubmissionMessage(
+      'Your email app should open with this message prefilled. If it does not, please email us directly and your form details will stay here.'
+    )
   }
 
   const handleChange = (
@@ -64,7 +78,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitopiainc.com</p>
+                    <p className="text-primary-100">{CONTACT_EMAIL}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -157,6 +171,11 @@ export default function Contact() {
               <span>Send Message</span>
               <Send className="w-5 h-5" />
             </motion.button>
+            {submissionMessage && (
+              <p className="text-sm text-primary-100" role="status">
+                {submissionMessage}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
