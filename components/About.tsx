@@ -37,7 +37,7 @@ export default function About() {
               with our clients.
             </p>
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-block px-8 py-4 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
