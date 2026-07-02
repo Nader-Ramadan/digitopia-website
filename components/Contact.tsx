@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const contactEmail = 'hello@digitopiainc.com'
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,10 +15,13 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    const subject = encodeURIComponent(`Project inquiry from ${formData.name}`)
+    const body = encodeURIComponent(
+      [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n')
+    )
+
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`
   }
 
   const handleChange = (
@@ -64,7 +69,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitopiainc.com</p>
+                    <a
+                      href={`mailto:${contactEmail}`}
+                      className="text-primary-100 hover:text-white transition-colors"
+                    >
+                      {contactEmail}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -98,6 +108,9 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             onSubmit={handleSubmit}
+            action={`mailto:${contactEmail}`}
+            method="post"
+            encType="text/plain"
             className="space-y-6"
           >
             <div>
