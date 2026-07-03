@@ -15,7 +15,7 @@ test('contact form hands messages to email without clearing unsent data', () => 
   assert.match(contact, /const CONTACT_EMAIL = 'hello@digitopiainc\.com'/)
   assert.match(contact, /const mailtoUrl = `mailto:\$\{CONTACT_EMAIL\}/)
   assert.match(contact, /window\.location\.href = mailtoUrl/)
-  assert.match(contact, /encodeURIComponent\(subject\)/)
+  assert.match(contact, /encodeURIComponent\(\s*subject\s*\)/)
   assert.match(contact, /encodeURIComponent\(body\)/)
   assert.doesNotMatch(contact, /console\.log\('Form submitted:'/)
   assert.doesNotMatch(contact, /alert\('Thank you for your message!/)
