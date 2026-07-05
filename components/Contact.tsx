@@ -4,6 +4,28 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
+const CONTACT_EMAIL = 'hello@digitopiainc.com'
+
+type ContactFormData = {
+  name: string
+  email: string
+  message: string
+}
+
+function buildMailtoHref(formData: ContactFormData) {
+  const subject = `New project inquiry from ${formData.name}`
+  const body = [
+    `Name: ${formData.name}`,
+    `Email: ${formData.email}`,
+    '',
+    formData.message,
+  ].join('\n')
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,10 +35,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+    window.location.href = buildMailtoHref(formData)
   }
 
   const handleChange = (
@@ -64,7 +83,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-primary-100">hello@digitopiainc.com</p>
+                    <p className="text-primary-100">{CONTACT_EMAIL}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
